@@ -1,0 +1,10 @@
+scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
+trunk_all_restr,3.157,11.967,-0.128,67.433,118.405,2.919,-14.966,0.074,0.026,-0.069,0.063
+scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
+trunk_ext_free,3.069,11.858,-0.215,46.310,77.275,2.958,-14.954,0.097,0.003,-0.075,0.062
+scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
+trunk_ben_free,3.069,11.316,-0.171,66.204,148.310,2.914,-14.531,0.146,-0.009,-0.089,0.062
+scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
+trunk_rot_free,2.884,11.309,-0.124,69.831,105.575,2.932,-14.223,0.096,0.022,-0.067,0.067
+scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
+trunk_all_free,2.729,11.269,-0.130,53.368,78.456,2.829,-14.177,0.134,-0.021,-0.082,0.068

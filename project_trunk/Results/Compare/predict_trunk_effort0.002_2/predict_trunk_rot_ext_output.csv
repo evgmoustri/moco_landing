@@ -1,0 +1,14 @@
+scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
+rot_0,0.167,1.383,-0.176,6.275,18.351,3.756,-7.761,0.334,0.006,0.000,0.023
+scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
+rot_-5,0.167,1.387,-0.177,6.273,18.315,3.757,-7.762,0.336,0.006,0.000,0.023
+scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
+rot_-10,0.168,1.387,-0.178,6.257,18.332,3.754,-7.762,0.337,0.005,0.000,0.022
+scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
+rot_-15,1.138,6.799,0.042,11.877,34.097,4.730,-14.651,0.330,0.119,-0.019,0.182
+scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
+rot_-20,0.782,5.194,0.022,19.366,38.563,4.623,-12.552,0.377,0.102,-0.020,0.165
+scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
+rot_-25,0.783,5.118,0.021,28.187,47.747,4.373,-12.141,0.370,0.102,-0.021,0.149
+scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
+rot_-30,0.604,4.304,-0.007,11.482,28.361,4.421,-11.667,0.329,0.088,-0.015,0.158
