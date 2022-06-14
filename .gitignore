@@ -1,5 +1,3 @@
-*.idea
-*extra
-*.log
-*_pycach
-*.7z
+/.idea/*
+/extra/*
+/_pycache_/*
