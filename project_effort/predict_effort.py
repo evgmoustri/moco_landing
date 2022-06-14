@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+"""
+@author:  Evgenia Moustridi (evgmoustridi@gmail.com)
+"""
+
 import os
 import opensim as osim
 import numpy as np
@@ -6,34 +11,24 @@ from utils import fix_controls, read_GRF_JR_file, index_containing_substring,\
 
 project_path = os.getcwd()
 
-# at_dict = {
-#     1: {'scenario': 'ef_0', 'effort': 0},
-#     2: {'scenario': 'ef_0.001', 'effort': 0.001},
-#     3: {'scenario': 'ef_0.005', 'effort': 0.005},
-#     4: {'scenario': 'ef_0.01', 'effort': 0.01},
-#     5: {'scenario': 'ef_0.1', 'effort': 0.1},
-#     6: {'scenario': 'ef_0.2', 'effort': 0.2},
-#     7: {'scenario': 'ef_0.5', 'effort': 0.5},
-#     8: {'scenario': 'ef_1', 'effort': 1},
-#     9: {'scenario': 'ef_2', 'effort': 2},
-#     10: {'scenario': 'ef_5', 'effort': 5},
-#     11: {'scenario': 'ef_10', 'effort': 10},
-# }
-
+# A dictionary containing all the examined weights for the effort goal
 at_dict = {
-#Rotation
-    1: {'scenario': 'ef_0.001', 'effort': 0.001},
-    # 2: {'scenario': 'ef_0.005', 'effort': 0.002},
-    # 3: {'scenario': 'ef_0.01', 'effort': 0.005},
-    # 4: {'scenario': 'ef_0.1', 'effort': 0.01},
-    # 5: {'scenario': 'ef_0.2', 'effort': 0.02},
-    # 6: {'scenario': 'ef_0.5', 'effort': 0.05}
+    1: {'scenario': 'ef_0', 'effort': 0},
+    2: {'scenario': 'ef_0.001', 'effort': 0.001},
+    3: {'scenario': 'ef_0.005', 'effort': 0.005},
+    4: {'scenario': 'ef_0.01', 'effort': 0.01},
+    5: {'scenario': 'ef_0.1', 'effort': 0.1},
+    6: {'scenario': 'ef_0.2', 'effort': 0.2},
+    7: {'scenario': 'ef_0.5', 'effort': 0.5},
+    8: {'scenario': 'ef_1', 'effort': 1},
+    9: {'scenario': 'ef_2', 'effort': 2},
+    10: {'scenario': 'ef_5', 'effort': 5},
+    11: {'scenario': 'ef_10', 'effort': 10},
 }
 
-
-
 for i in range(len(at_dict)):
-    model_path = os.path.abspath(project_path + "/Opensim_Models")
+    # Initialization of the OpenSim musculoskeletal model
+    model_path = os.path.abspath(project_path + "../Opensim_Models")
     model_file = os.path.abspath(model_path
                                  + "/Gait2392\gait2392_only_left.osim")
     modelProcessor = osim.ModelProcessor(model_file)
@@ -45,7 +40,6 @@ for i in range(len(at_dict)):
     model = modelProcessor.process()
     scenario = at_dict[i+1]['scenario']
     w_ef = np.deg2rad(at_dict[i+1]['effort'])
-
 
     results_path = os.path.abspath(project_path +
                                    "/Results/predict_effort/" +
@@ -72,7 +66,7 @@ for i in range(len(at_dict)):
                                 osim.MocoBounds(0, 1),
                                 osim.MocoInitialBounds(0))
     # -----------------------------------------------------------
-    # Pelvis
+    # Pelvis joint
     # -----------------------------------------------------------
     problem.setStateInfo("/jointset/ground_pelvis/pelvis_ty/value",
                          osim.MocoBounds(0.7, 1.25),
@@ -93,7 +87,7 @@ for i in range(len(at_dict)):
                          osim.MocoInitialBounds(0))
 
     # -----------------------------------------------------------
-    # Right Leg
+    # Right lower limb
     # -----------------------------------------------------------
 
     problem.setStateInfo("/jointset/hip_r/hip_flexion_r/value",
@@ -124,7 +118,7 @@ for i in range(len(at_dict)):
                          osim.MocoBounds(-0.01, 0.01))
 
     # -----------------------------------------------------------
-    # Left Leg
+    # Left lower limb
     # -----------------------------------------------------------
     problem.setStateInfo("/jointset/hip_l/hip_flexion_l/value", osim.MocoBounds(
         0.08, 0.5), osim.MocoInitialBounds(0.087))
@@ -149,7 +143,7 @@ for i in range(len(at_dict)):
                          osim.MocoBounds(-0.1, 0.1))
 
     # -----------------------------------------------------------
-    # Lumbar
+    # Lumbar joint
     # -----------------------------------------------------------
     # -----------------------------------------------------------
     problem.setStateInfoPattern("/jointset/.*/lumbar_.*/value",
@@ -159,15 +153,13 @@ for i in range(len(at_dict)):
     # Set Goals
     problem.addGoal(osim.MocoControlGoal('effort', w_ef))
 
-
+    # Set solver
     solver = study.initCasADiSolver()
     solver.set_num_mesh_intervals(100)
     solver.set_verbosity(2)
     solver.set_optim_solver("ipopt")
     solver.set_optim_convergence_tolerance(1e-2)
     solver.set_optim_constraint_tolerance(1e-2)
-    # solver.set_optim_max_iterations(2)
-
     solver.setGuessFile(project_path + "/Data_files/solution_2392.sto")
 
     solution = study.solve()
@@ -184,8 +176,9 @@ for i in range(len(at_dict)):
                                 bilateral=True,
                                 output=results_path + '/track_report.pdf')
     report.generate()
+
     # -----------------------------------------------------------
-    #  normalized tendon forces are essentially normalized muscle forces
+    #  Export normalized tendon forces (normalized muscle forces)
     # -----------------------------------------------------------
     outputPaths = osim.StdVectorString()
     outputPaths.append('.*tendon_force')
@@ -206,7 +199,6 @@ for i in range(len(at_dict)):
     contact_l.append('foot_l_2')
     contact_l.append('foot_l_3')
 
-
     externalForcesTableFlat = osim.createExternalLoadsTableForGait(model,
                                                                    solution,
                                                                    contact_r,
@@ -222,7 +214,6 @@ for i in range(len(at_dict)):
     bw = 737.0678
 
     JR_paths = osim.StdVectorString()
-    # JR_paths.append('.*reaction_on_parent')
     JR_paths.append('.*reaction_on_child')
 
     states = solution.exportToStatesTable()
@@ -234,7 +225,7 @@ for i in range(len(at_dict)):
                               "/JR_in_Ground.sto")
 
     # -----------------------------------------------------------
-    #  express in Child
+    #  express on Child
     # -----------------------------------------------------------
     model.initSystem()
     headers, jr_labels, jr_data = read_GRF_JR_file(results_path +

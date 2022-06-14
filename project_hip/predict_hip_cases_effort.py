@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+"""
+@author:  Evgenia Moustridi (evgmoustridi@gmail.com)
+"""
+
 import os
 import opensim as osim
 import numpy as np
@@ -6,30 +11,24 @@ from utils import fix_controls, read_GRF_JR_file, index_containing_substring,\
 
 project_path = os.getcwd()
 
-# at_dict = {
-# #Rotation
-#     1: {'scenario': 'rot_5', 'hip_add_final': 0,  'hip_rot_final': 5},
-#     2: {'scenario': 'rot_10', 'hip_add_final': 0, 'hip_rot_final': 10},
-#     3: {'scenario': 'rot_15', 'hip_add_final': 0, 'hip_rot_final': 15},
-#     4: {'scenario': 'rot_20', 'hip_add_final': 0, 'hip_rot_final': 20},
-#     5: {'scenario': 'rot_25', 'hip_add_final': 0, 'hip_rot_final': 25},
-#     6: {'scenario': 'rot_30', 'hip_add_final': 0, 'hip_rot_final': 30},
-#     7: {'scenario': 'rot_35', 'hip_add_final': 0, 'hip_rot_final': 35},
-#     8: {'scenario': 'rot_40', 'hip_add_final': 0, 'hip_rot_final': 40},
-#     9: {'scenario': 'rot_-5', 'hip_add_final': 0, 'hip_rot_final': -5},
-#     10: {'scenario': 'rot_-10', 'hip_add_final': 0, 'hip_rot_final': -10},
-#     11: {'scenario': 'rot_-15', 'hip_add_final': 0, 'hip_rot_final': -15},
-#     12: {'scenario': 'rot_-20', 'hip_add_final': 0,'hip_rot_final': -20},
-#     13: {'scenario': 'rot_-25', 'hip_add_final': 0, 'hip_rot_final': -25},
-#     14: {'scenario': 'rot_-30', 'hip_add_final': 0, 'hip_rot_final': -30},
-#     15: {'scenario': 'rot_-35', 'hip_add_final': 0, 'hip_rot_final': -35},
-#     16: {'scenario': 'rot_-40', 'hip_add_final': 0, 'hip_rot_final': -40},
-# }
-
 at_dict = {
 #Rotation
-    1: {'scenario': 'rot_21', 'hip_add_final': 0, 'hip_rot_final': 21},
-    2: {'scenario': 'rot_-36', 'hip_add_final': 0, 'hip_rot_final': -36},
+    1: {'scenario': 'rot_5', 'hip_add_final': 0,  'hip_rot_final': 5},
+    2: {'scenario': 'rot_10', 'hip_add_final': 0, 'hip_rot_final': 10},
+    3: {'scenario': 'rot_15', 'hip_add_final': 0, 'hip_rot_final': 15},
+    4: {'scenario': 'rot_20', 'hip_add_final': 0, 'hip_rot_final': 20},
+    5: {'scenario': 'rot_25', 'hip_add_final': 0, 'hip_rot_final': 25},
+    6: {'scenario': 'rot_30', 'hip_add_final': 0, 'hip_rot_final': 30},
+    7: {'scenario': 'rot_35', 'hip_add_final': 0, 'hip_rot_final': 35},
+    8: {'scenario': 'rot_40', 'hip_add_final': 0, 'hip_rot_final': 40},
+    9: {'scenario': 'rot_-5', 'hip_add_final': 0, 'hip_rot_final': -5},
+    10: {'scenario': 'rot_-10', 'hip_add_final': 0, 'hip_rot_final': -10},
+    11: {'scenario': 'rot_-15', 'hip_add_final': 0, 'hip_rot_final': -15},
+    12: {'scenario': 'rot_-20', 'hip_add_final': 0,'hip_rot_final': -20},
+    13: {'scenario': 'rot_-25', 'hip_add_final': 0, 'hip_rot_final': -25},
+    14: {'scenario': 'rot_-30', 'hip_add_final': 0, 'hip_rot_final': -30},
+    15: {'scenario': 'rot_-35', 'hip_add_final': 0, 'hip_rot_final': -35},
+    16: {'scenario': 'rot_-40', 'hip_add_final': 0, 'hip_rot_final': -40},
 }
 
 for i in range(len(at_dict)):

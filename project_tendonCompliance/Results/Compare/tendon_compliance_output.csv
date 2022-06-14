@@ -1,8 +1,0 @@
-scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
-Predict_ImplicitTendonComplianceDynamics_PassiveFiberForce,0.006,1.425,-0.136,4.438,6.341,7.927,-8.065,0.519,0.038,-0.007,0.317
-scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
-RigidTendon_h30,0.066,1.436,-0.092,9.243,6.036,6.300,-6.907,0.577,0.021,-0.017,0.160
-scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
-Predict_ImplicitTendonComplianceDynamics_PassiveFiberForce,0.006,1.425,-0.136,4.438,6.341,7.927,-8.065,0.519,0.038,-0.007,0.317
-scenario,fx,max_fy,fz,qh_ratio,gta_ratio,fx_jr,fy_jr,fz_jr,mx_jr,my_jr,mz_jr
-RigidTendon_h30,0.066,1.436,-0.092,9.243,6.036,6.300,-6.907,0.577,0.021,-0.017,0.160

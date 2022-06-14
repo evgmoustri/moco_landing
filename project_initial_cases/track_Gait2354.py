@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+"""
+@author:  Evgenia Moustridi (evgmoustridi@gmail.com)
+"""
+
 import os
 import opensim as osim
 import numpy as np

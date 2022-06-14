@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+"""
+@author:  Evgenia Moustridi (evgmoustridi@gmail.com)
+"""
+
 import os
 import numpy as np
 from utils import readExternalLoadsFile
@@ -7,6 +12,7 @@ import csv
 from scipy.signal import savgol_filter
 from matplotlib import rc, rcParams
 from matplotlib.patches import Rectangle
+
 mls = 'solid'
 c1 = 'r'
 c2 = 'g'

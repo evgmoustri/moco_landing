@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+"""
+@author:  Evgenia Moustridi (evgmoustridi@gmail.com)
+"""
+
 import os
 import opensim as osim
 import numpy as np
@@ -6,15 +11,12 @@ from utils import fix_controls, read_GRF_JR_file, index_containing_substring,\
 from matplotlib import pyplot as plt
 import pandas as pd
 
+# Define number of nodes and intervals for Grid
 # intervals = [5, 10, 25, 50, 100, 200]
 # nodes = [11, 21, 51, 101 , 201, 401]
 
 intervals = [150, 250, 300, 350, 400]
 nodes = [301, 501, 601, 701 , 801]
-
-iterations = []
-time = []
-cost = []
 
 iterations = []
 time = []
@@ -38,7 +40,7 @@ for num_of_intervals in intervals:
     modelProcessor.append(osim.ModOpScaleActiveFiberForceCurveWidthDGF(1.5))
     modelProcessor.append(osim.ModOpAddReserves(100))
     model = modelProcessor.process()
-    #scenario = at_dict[1]['scenario']
+
     lumbar_ext_final = np.deg2rad(at_dict[1]['lumbar_ext_final'])
     lumbar_rot_final = np.deg2rad(at_dict[1]['lumbar_rot_final'])
     lumbar_ben_final = np.deg2rad(at_dict[1]['lumbar_ben_final'])
@@ -69,7 +71,7 @@ for num_of_intervals in intervals:
                                 osim.MocoBounds(0, 1),
                                 osim.MocoInitialBounds(0))
     # -----------------------------------------------------------
-    # Pelvis
+    # Pelvis joint
     # -----------------------------------------------------------
     problem.setStateInfo("/jointset/ground_pelvis/pelvis_ty/value",
                          osim.MocoBounds(0.5, pelvis_ty),
@@ -90,7 +92,7 @@ for num_of_intervals in intervals:
                          osim.MocoInitialBounds(0))
 
     # -----------------------------------------------------------
-    # Right Leg
+    # Right lower limb
     # -----------------------------------------------------------
 
     problem.setStateInfo("/jointset/hip_r/hip_flexion_r/value",
@@ -121,7 +123,7 @@ for num_of_intervals in intervals:
                          osim.MocoBounds(-0.01, 0.01))
 
     # -----------------------------------------------------------
-    # Left Leg
+    # Left lower limb
     # -----------------------------------------------------------
     problem.setStateInfo("/jointset/hip_l/hip_flexion_l/value", osim.MocoBounds(
         0.08, 0.5), osim.MocoInitialBounds(0.087))
@@ -131,16 +133,10 @@ for num_of_intervals in intervals:
                          osim.MocoBounds(
                              -0.6, 0.8), osim.MocoInitialBounds(-0.6))
 
-    # problem.setStateInfo("/jointset/hip_l/hip_adduction_l/value",
-    #                      osim.MocoBounds(np.deg2rad(-0.01), np.deg2rad(0.01)),
-    #                      osim.MocoInitialBounds(0))
     problem.setStateInfo("/jointset/hip_l/hip_adduction_l/value",
                          osim.MocoBounds(-0.01, 0.01),
                          osim.MocoInitialBounds(0))
 
-    # problem.setStateInfo("/jointset/hip_l/hip_rotation_l/value",
-    #                      osim.MocoBounds(np.deg2rad(-0.01), np.deg2rad(0.01)),
-    #                      osim.MocoInitialBounds(0))
     problem.setStateInfo("/jointset/hip_l/hip_rotation_l/value",
                          osim.MocoBounds(-0.01, 0.01),
                          osim.MocoInitialBounds(0))
@@ -152,7 +148,7 @@ for num_of_intervals in intervals:
                          osim.MocoBounds(-0.1, 0.1))
 
     # -----------------------------------------------------------
-    # Lumbar
+    # Lumbar joint
     # -----------------------------------------------------------
     # extension
     if lumbar_ext_final >= 0:
@@ -190,15 +186,12 @@ for num_of_intervals in intervals:
     # Set Goals
     problem.addGoal(osim.MocoControlGoal('effort', 0.001))
 
-
     solver = study.initCasADiSolver()
     solver.set_num_mesh_intervals(num_of_intervals)
     solver.set_verbosity(2)
     solver.set_optim_solver("ipopt")
     solver.set_optim_convergence_tolerance(1e-2)
     solver.set_optim_constraint_tolerance(1e-2)
-    # solver.set_optim_max_iterations(2)
-
     solver.setGuessFile(project_path + "/Data_files/solution_2392.sto")
 
     solution = study.solve()
@@ -215,8 +208,9 @@ for num_of_intervals in intervals:
                                 bilateral=True,
                                 output=results_path + '/track_report.pdf')
     report.generate()
+
     # -----------------------------------------------------------
-    #  normalized tendon forces are essentially normalized muscle forces
+    #  Export normalized tendon forces are essentially normalized muscle forces
     # -----------------------------------------------------------
     outputPaths = osim.StdVectorString()
     outputPaths.append('.*tendon_force')
@@ -237,7 +231,6 @@ for num_of_intervals in intervals:
     contact_l.append('foot_l_2')
     contact_l.append('foot_l_3')
 
-
     externalForcesTableFlat = osim.createExternalLoadsTableForGait(model,
                                                                    solution,
                                                                    contact_r,
@@ -253,7 +246,6 @@ for num_of_intervals in intervals:
     bw = 737.0678
 
     JR_paths = osim.StdVectorString()
-    # JR_paths.append('.*reaction_on_parent')
     JR_paths.append('.*reaction_on_child')
 
     states = solution.exportToStatesTable()

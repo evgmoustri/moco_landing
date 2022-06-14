@@ -1,5 +1,8 @@
-import matplotlib.pyplot as plt
-import numpy as np
+# -*- coding: utf-8 -*-
+"""
+@author:  Evgenia Moustridi (evgmoustridi@gmail.com)
+"""
+
 import os
 import xml.etree.ElementTree as ET
 from lxml import etree

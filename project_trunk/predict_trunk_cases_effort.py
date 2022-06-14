@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+"""
+@author:  Evgenia Moustridi (evgmoustridi@gmail.com)
+"""
+
 import os
 import opensim as osim
 import numpy as np
@@ -305,10 +310,7 @@ for i in range(len(at_dict)):
     solver.set_optim_solver("ipopt")
     solver.set_optim_convergence_tolerance(1e-2)
     solver.set_optim_constraint_tolerance(1e-2)
-    # solver.set_optim_max_iterations(2)
-
     # solver.setGuessFile(project_path + "/Data_files/solution_2392.sto")
-
 
     solution = study.solve()
     solution.unseal()

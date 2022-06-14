@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+"""
+@author:  Evgenia Moustridi (evgmoustridi@gmail.com)
+"""
+
 import os
 import opensim as osim
 import numpy as np
@@ -5,6 +10,7 @@ from utils import fix_controls, read_GRF_JR_file, index_containing_substring,\
     estimate_cop, fix_sto_2392
 
 project_path = os.getcwd()
+# Define the landing heights of interest
 at_dict = {
     1: {'scenario': 'h25', 'lumbar_ext_final': 0, 'lumbar_rot_final': 0,
         'lumbar_ben_final': 0, 'height': 1.2},
@@ -72,7 +78,7 @@ for i in range(len(at_dict)):
                                 osim.MocoBounds(0, 1),
                                 osim.MocoInitialBounds(0))
     # -----------------------------------------------------------
-    # Pelvis
+    # Pelvis joint
     # -----------------------------------------------------------
     problem.setStateInfo("/jointset/ground_pelvis/pelvis_ty/value",
                          osim.MocoBounds(0.5, pelvis_ty),
@@ -93,7 +99,7 @@ for i in range(len(at_dict)):
                          osim.MocoInitialBounds(0))
 
     # -----------------------------------------------------------
-    # Right Leg
+    # Right lower limb
     # -----------------------------------------------------------
 
     problem.setStateInfo("/jointset/hip_r/hip_flexion_r/value",
@@ -124,7 +130,7 @@ for i in range(len(at_dict)):
                          osim.MocoBounds(-0.01, 0.01))
 
     # -----------------------------------------------------------
-    # Left Leg
+    # Left lower limb
     # -----------------------------------------------------------
     problem.setStateInfo("/jointset/hip_l/hip_flexion_l/value", osim.MocoBounds(
         0.08, 0.5), osim.MocoInitialBounds(0.087))
@@ -155,7 +161,7 @@ for i in range(len(at_dict)):
                          osim.MocoBounds(-0.1, 0.1))
 
     # -----------------------------------------------------------
-    # Lumbar
+    # Lumbar joint
     # -----------------------------------------------------------
     # extension
     if lumbar_ext_final >= 0:
@@ -200,7 +206,6 @@ for i in range(len(at_dict)):
     solver.set_optim_solver("ipopt")
     solver.set_optim_convergence_tolerance(1e-2)
     solver.set_optim_constraint_tolerance(1e-2)
-    # solver.set_optim_max_iterations(2)
 
     solver.setGuessFile(project_path + "/Data_files/solution_2392.sto")
 
@@ -218,6 +223,7 @@ for i in range(len(at_dict)):
                                 bilateral=True,
                                 output=results_path + '/track_report.pdf')
     report.generate()
+
     # -----------------------------------------------------------
     #  normalized tendon forces are essentially normalized muscle forces
     # -----------------------------------------------------------
@@ -256,7 +262,6 @@ for i in range(len(at_dict)):
     bw = 737.0678
 
     JR_paths = osim.StdVectorString()
-    # JR_paths.append('.*reaction_on_parent')
     JR_paths.append('.*reaction_on_child')
 
     states = solution.exportToStatesTable()
