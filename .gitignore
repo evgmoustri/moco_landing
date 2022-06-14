@@ -1,0 +1,5 @@
+*.idea
+*extra
+*.log
+*_pycach
+*.7z
