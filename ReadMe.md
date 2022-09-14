@@ -1,4 +1,7 @@
 ### Predictive simulation of single-leg landing scenarios for  ACL injury risk factors evaluation
+Predictive simulations using the Moco OpenSim tool (and Gait2392 OpenSim 
+musculoskeletal model) in order to predict multiple cases of single - leg 
+landing motions
 
 Predictive simulations using the Moco OpenSim tool (and Gait2392 OpenSim 
 musculoskeletal model) in order to predict multiple cases of single - leg 
